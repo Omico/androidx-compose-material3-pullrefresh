@@ -17,6 +17,7 @@
 package androidx.compose.material3.pullrefresh
 
 import androidx.compose.animation.core.animate
+import androidx.compose.foundation.MutatorMutex
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.State
@@ -30,10 +31,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import kotlin.math.abs
-import kotlin.math.pow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.math.abs
+import kotlin.math.pow
 
 /**
  * Creates a [PullRefreshState] that is remembered across compositions.
@@ -98,7 +99,7 @@ class PullRefreshState internal constructor(
     private val animationScope: CoroutineScope,
     private val onRefreshState: State<() -> Unit>,
     private val refreshingOffset: Float,
-    internal val threshold: Float
+    internal val threshold: Float,
 ) {
     /**
      * A float representing how far the user has pulled as a percentage of the refreshThreshold.
@@ -133,9 +134,8 @@ class PullRefreshState internal constructor(
         if (!this._refreshing) {
             if (adjustedDistancePulled > threshold) {
                 onRefreshState.value()
-            } else {
-                animateIndicatorTo(0f)
             }
+            animateIndicatorTo(0f)
         }
         distancePulled = 0f
     }
@@ -148,9 +148,16 @@ class PullRefreshState internal constructor(
         }
     }
 
+    // Make sure to cancel any existing animations when we launch a new one. We use this instead of
+    // Animatable as calling snapTo() on every drag delta has a one frame delay, and some extra
+    // overhead of running through the animation pipeline instead of directly mutating the state.
+    private val mutatorMutex = MutatorMutex()
+
     private fun animateIndicatorTo(offset: Float) = animationScope.launch {
-        animate(initialValue = _position, targetValue = offset) { value, _ ->
-            _position = value
+        mutatorMutex.mutate {
+            animate(initialValue = _position, targetValue = offset) { value, _ ->
+                _position = value
+            }
         }
     }
 
