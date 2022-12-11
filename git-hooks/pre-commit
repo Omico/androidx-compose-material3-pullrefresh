@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Chmod git hooks
+git ls-files git-hooks | xargs git update-index --add --chmod=+x
+
+# Chmod Gradle wrapper
+git ls-files gradlew | xargs git update-index --add --chmod=+x
