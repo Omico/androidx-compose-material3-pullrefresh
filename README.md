@@ -1,9 +1,11 @@
 # androidx-compose-material3-pullrefresh
 
-This is a simple wrapper for Jetpack Compose Material3's `PullRefreshIndicator`.
+This is a simple wrapper for Jetpack Compose Material3's `PullRefreshIndicator`. The official implementation is not compatible with Material 3 theme. Also, this library contains a quick fix for [this commit](https://github.com/androidx/androidx/commit/4e301885e5b470a41320fd3900764a2ba5738d53) which is not in the latest stable release (Compose BOM 2022.12.00 or Compose Material 1.3.2).
 
 Official documentation
-see [here](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean))
+see [here](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean)).
+
+Note that you should change all package name from `androidx.compose.material.pullrefresh` into `androidx.compose.material3.pullrefresh`.
 
 ## Usage
 
