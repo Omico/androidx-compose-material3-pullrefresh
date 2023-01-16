@@ -13,6 +13,7 @@ pluginManagement {
         }
         plugins {
             id("com.android.library") version "7.3.1"
+            id("com.gradle.enterprise") version "3.11.4"
             kotlin("android") version "1.7.21"
         }
     }
@@ -27,14 +28,17 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.11.4"
+    id("com.gradle.enterprise") apply false
 }
 
-gradleEnterprise {
-    buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
-        publishAlwaysIf(!gradle.startParameter.isOffline)
+if (gradle.parent == null) {
+    apply(plugin = "com.gradle.enterprise")
+    gradleEnterprise {
+        buildScan {
+            termsOfServiceUrl = "https://gradle.com/terms-of-service"
+            termsOfServiceAgree = "yes"
+            publishAlwaysIf(!gradle.startParameter.isOffline)
+        }
     }
 }
 
