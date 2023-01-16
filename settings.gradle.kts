@@ -12,9 +12,9 @@ pluginManagement {
             }
         }
         plugins {
-            id("com.android.library") version "7.3.1"
-            id("com.gradle.enterprise") version "3.11.4"
-            kotlin("android") version "1.7.21"
+            id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
+            id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
+            kotlin("android") version extra["project.kotlin.version"] as String
         }
     }
 }
