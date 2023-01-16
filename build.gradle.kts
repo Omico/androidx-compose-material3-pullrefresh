@@ -1,7 +1,5 @@
 import java.util.Properties
 
-addGitHooks()
-
 val localProperties = Properties().apply {
     val file = rootProject.file("local.properties")
     if (!file.exists()) file.createNewFile()
@@ -70,28 +68,3 @@ if (androidxDirectory != null) {
         }
     }
 }
-
-fun addGitHooks(targetPath: String? = null) {
-    val targetDir = targetPath?.let { File(rootDir, it) } ?: rootDir
-    if (!targetDir.hasGit) return
-    val hooksDir = File(targetDir, ".git/hooks")
-    if (!hooksDir.exists()) hooksDir.mkdirs()
-    File(rootDir, "git-hooks")
-        .walk()
-        .maxDepth(1)
-        .filter(File::isFile)
-        .forEach {
-            val targetFile = File(hooksDir, it.name)
-            when {
-                org.gradle.internal.os.OperatingSystem.current().isWindows -> it.copyTo(targetFile, overwrite = true)
-                else -> {
-                    if (targetFile.canonicalFile == it) return@forEach
-                    targetFile.delete()
-                    java.nio.file.Files.createSymbolicLink(targetFile.toPath(), it.toPath())
-                }
-            }
-        }
-}
-
-val File.hasGit: Boolean
-    get() = File(this, ".git").exists()
