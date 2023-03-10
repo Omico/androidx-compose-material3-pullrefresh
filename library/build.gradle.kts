@@ -3,6 +3,10 @@ plugins {
     kotlin("android")
 }
 
+kotlin {
+    jvmToolchain(11)
+}
+
 android {
     namespace = "me.omico.lux.compose.material3.pullrefresh"
     compileSdk = 33
@@ -11,6 +15,10 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     composeOptions {
         kotlinCompilerExtensionVersion = properties["project.compose.compiler.version"] as String
