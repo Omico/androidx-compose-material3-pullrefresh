@@ -8,7 +8,7 @@ val localProperties = Properties().apply {
 
 val androidxDirectory = localProperties["androidx.directory"] as? String
 
-if (androidxDirectory != null) {
+if (androidxDirectory != null && gradle.parent == null) {
     val fetchAndroidx by tasks.registering {
         group = "project"
         exec {
