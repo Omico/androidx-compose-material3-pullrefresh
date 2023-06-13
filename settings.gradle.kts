@@ -9,6 +9,7 @@ pluginManagement {
         gradlePluginPortal()
     }
     plugins {
+        id("com.android.application") version extra["project.android.gradle.plugin.version"] as String
         id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
         id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
         kotlin("android") version extra["project.kotlin.version"] as String
@@ -36,6 +37,8 @@ if (gradle.parent == null) {
             publishAlwaysIf(!gradle.startParameter.isOffline)
         }
     }
+
+    include("test-app")
 }
 
 include("library")
