@@ -6,16 +6,12 @@ pluginManagement {
     repositories {
         google()
         mavenCentral()
-        gradlePluginPortal {
-            content {
-                includeGroupByRegex("com.gradle.*")
-            }
-        }
-        plugins {
-            id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
-            id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
-            kotlin("android") version extra["project.kotlin.version"] as String
-        }
+        gradlePluginPortal()
+    }
+    plugins {
+        id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
+        id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
+        kotlin("android") version extra["project.kotlin.version"] as String
     }
 }
 
