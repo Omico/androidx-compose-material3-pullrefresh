@@ -3,16 +3,21 @@
 rootProject.name = "androidx-compose-material3-pullrefresh"
 
 pluginManagement {
+    val localProperties = java.util.Properties().apply {
+        val file = file("local.properties")
+        if (!file.exists()) file.createNewFile()
+        load(file.inputStream())
+    }
     repositories {
         google()
         mavenCentral()
         gradlePluginPortal()
     }
     plugins {
-        id("com.android.application") version extra["project.android.gradle.plugin.version"] as String
-        id("com.android.library") version extra["project.android.gradle.plugin.version"] as String
-        id("com.gradle.enterprise") version extra["project.gradle.enterprise.plugin.version"] as String
-        kotlin("android") version extra["project.kotlin.version"] as String
+        id("com.android.application") version localProperties["project.android.gradle.plugin.version"] as String
+        id("com.android.library") version localProperties["project.android.gradle.plugin.version"] as String
+        id("com.gradle.enterprise") version localProperties["project.gradle.enterprise.plugin.version"] as String
+        kotlin("android") version localProperties["project.kotlin.version"] as String
     }
 }
 

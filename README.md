@@ -11,7 +11,9 @@ Note that you should change all package name from `androidx.compose.material.pul
 
 This library only supports using composite build to import to your project because it will be archived when the official library is released.
 
-In your root project's `settings.gradle.kts` file, add the following:
+Copy `local.properties.template` to `local.properties` and follow the instructions in the file to fit your environment.
+
+In your root project's `settings.gradle.kts` or `settings.gradle` file, add the following:
 
 ```kotlin
 includeBuild("<androidx-compose-material3-pullrefresh-path>") {
@@ -21,7 +23,9 @@ includeBuild("<androidx-compose-material3-pullrefresh-path>") {
 }
 ```
 
-In your app module's `build.gradle.kts` file, add the following:
+Note: `<androidx-compose-material3-pullrefresh-path>` is the path to this library. For example, if you put this library in `<your-app>/libraries/androidx-compose-material3-pullrefresh`, then the path is `libraries/androidx-compose-material3-pullrefresh`. Or you can use absolute path too.
+
+In your app module's `build.gradle.kts` or `build.gradle` file, add the following:
 
 ```kotlin
 dependencies {

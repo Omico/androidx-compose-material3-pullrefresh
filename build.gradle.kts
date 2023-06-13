@@ -6,6 +6,11 @@ val localProperties = Properties().apply {
     load(file.inputStream())
 }
 
+listOf(
+    "project.compose.bom.version",
+    "project.compose.compiler.version",
+).forEach { ext[it] = localProperties[it] }
+
 val androidxDirectory = localProperties["androidx.directory"] as? String
 
 if (androidxDirectory != null && gradle.parent == null) {
@@ -22,7 +27,7 @@ if (androidxDirectory != null && gradle.parent == null) {
         mustRunAfter(fetchAndroidx)
         exec {
             workingDir = file(androidxDirectory)
-            commandLine = listOf("git", "checkout", properties["project.androidx.commitId"] as String)
+            commandLine = listOf("git", "checkout", localProperties["project.androidx.commitId"] as String)
         }
     }
     tasks.register("syncUpstream") {
