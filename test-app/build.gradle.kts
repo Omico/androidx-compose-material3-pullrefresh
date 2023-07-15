@@ -31,7 +31,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":library"))
+    implementation(project(":material3-pullrefresh"))
 }
 
 dependencies {

@@ -46,4 +46,5 @@ if (gradle.parent == null) {
     include("test-app")
 }
 
-include("library")
+include("material3-pullrefresh")
+project(":material3-pullrefresh").projectDir = file("library")
