@@ -10,7 +10,7 @@ kotlin {
 }
 
 android {
-    namespace = "me.omico.lux.compose.material3.pullrefresh"
+    namespace = "me.omico.compose.material3.pullrefresh"
     compileSdk = 33
     defaultConfig {
         minSdk = 21
