@@ -17,7 +17,9 @@ pluginManagement {
         id("com.android.application") version localProperties["project.android.gradle.plugin.version"] as String
         id("com.android.library") version localProperties["project.android.gradle.plugin.version"] as String
         id("com.gradle.enterprise") version localProperties["project.gradle.enterprise.plugin.version"] as String
+        id("org.jetbrains.compose") version localProperties["project.compose.multiplatform.version"] as String
         kotlin("android") version localProperties["project.kotlin.version"] as String
+        kotlin("multiplatform") version localProperties["project.kotlin.version"] as String
     }
 }
 
@@ -26,6 +28,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 

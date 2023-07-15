@@ -1,5 +1,12 @@
 import java.util.Properties
 
+plugins {
+    kotlin("android") apply false
+    kotlin("multiplatform") apply false
+    id("com.android.application") apply false
+    id("com.android.library") apply false
+}
+
 val localProperties = Properties().apply {
     val file = rootProject.file("local.properties")
     if (!file.exists()) file.createNewFile()
@@ -36,7 +43,7 @@ if (androidxDirectory != null && gradle.parent == null) {
         mustRunAfter(fetchAndroidx, checkoutAndroidx)
         doLast {
             val upstream = rootProject.file("$androidxDirectory/compose/material/material/src/commonMain/kotlin/androidx/compose/material/pullrefresh")
-            val local = rootProject.file("library/src/main/kotlin/androidx/compose/material3/pullrefresh")
+            val local = rootProject.file("library/src/commonMain/kotlin/androidx/compose/material3/pullrefresh")
             upstream.walk().forEach { upstreamFile ->
                 if (upstreamFile.isDirectory) return@forEach
                 val relativePath = upstreamFile.relativeTo(upstream)

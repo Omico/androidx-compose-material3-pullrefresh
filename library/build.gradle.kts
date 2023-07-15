@@ -1,12 +1,24 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
+    kotlin("multiplatform")
     id("com.android.library")
-    kotlin("android")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
     jvmToolchain(11)
+    android()
+    jvm("desktop")
+    sourceSets {
+        commonMain {
+            dependencies {
+                compileOnly(compose.foundation)
+                compileOnly(compose.material3)
+                compileOnly(compose.ui)
+            }
+        }
+    }
 }
 
 android {
@@ -25,11 +37,4 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = properties["project.compose.compiler.version"] as String
     }
-}
-
-dependencies {
-    compileOnly(platform("androidx.compose:compose-bom:${properties["project.compose.bom.version"]}"))
-    compileOnly("androidx.compose.foundation:foundation")
-    compileOnly("androidx.compose.material3:material3")
-    compileOnly("androidx.compose.ui:ui")
 }
