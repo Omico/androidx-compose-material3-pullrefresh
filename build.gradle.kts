@@ -1,3 +1,4 @@
+import java.io.ByteArrayOutputStream
 import java.util.Properties
 
 plugins {
@@ -6,6 +7,23 @@ plugins {
     id("com.android.application") apply false
     id("com.android.library") apply false
 }
+
+allprojects {
+    group = "me.omico.compose.material3"
+    version = projectVersion
+}
+
+val projectVersion: String
+    get() = run {
+        val version = properties["project.version"] as String
+        if (version != "snapshot") return@run version
+        val outputStream = ByteArrayOutputStream()
+        exec {
+            commandLine = listOf("git", "rev-parse", "--short", "HEAD")
+            standardOutput = outputStream
+        }
+        outputStream.toString().trim().let { commitId -> "$version.$commitId" }
+    }
 
 val localProperties = Properties().apply {
     val file = rootProject.file("local.properties")
