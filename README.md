@@ -3,7 +3,7 @@
 This is a simple wrapper for Jetpack Compose Material3's `PullRefreshIndicator`. The official implementation is not compatible with Material 3 theme.
 
 Official documentation
-see [here](https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean)).
+see [here](<https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean)>).
 
 Note that you should change all package name from `androidx.compose.material.pullrefresh` into `androidx.compose.material3.pullrefresh`.
 
@@ -11,25 +11,32 @@ Note that you should change all package name from `androidx.compose.material.pul
 
 This library only supports using composite build to import to your project because it will be archived when the official library is released.
 
-Copy `local.properties.template` to `local.properties` and follow the instructions in the file to fit your environment.
+> Note: `<androidx-compose-material3-pullrefresh-path>` is the path to this library. For example, if you put this library in `<your-app>/libraries/androidx-compose-material3-pullrefresh`, then the path is `libraries/androidx-compose-material3-pullrefresh`. Or you can use absolute path too.
+
+Copy `<androidx-compose-material3-pullrefresh-path>/local.properties.template` to `<androidx-compose-material3-pullrefresh-path>/local.properties` and follow the instructions in the file to fit your environment.
+
+### For try it out or contribution purpose
+
+Open `<androidx-compose-material3-pullrefresh-path>/example` in Android Studio and run it.
+
+### Use it in your project
 
 In your root project's `settings.gradle.kts` or `settings.gradle` file, add the following:
 
 ```kotlin
 includeBuild("<androidx-compose-material3-pullrefresh-path>") {
     dependencySubstitution {
-        substitute(module("me.omico.lux:lux-androidx-compose-material3-pullrefresh")).using(project(":library"))
+        substitute(module("me.omico.compose:compose-material3-pullrefresh"))
+            .using(project(":material3-pullrefresh"))
     }
 }
 ```
-
-Note: `<androidx-compose-material3-pullrefresh-path>` is the path to this library. For example, if you put this library in `<your-app>/libraries/androidx-compose-material3-pullrefresh`, then the path is `libraries/androidx-compose-material3-pullrefresh`. Or you can use absolute path too.
 
 In your app module's `build.gradle.kts` or `build.gradle` file, add the following:
 
 ```kotlin
 dependencies {
-    implementation("me.omico.lux:lux-androidx-compose-material3-pullrefresh")
+    implementation("me.omico.compose:compose-material3-pullrefresh")
 }
 ```
 

@@ -1,100 +1,10 @@
-import java.io.ByteArrayOutputStream
-import java.util.Properties
-
 plugins {
     kotlin("android") apply false
     kotlin("multiplatform") apply false
-    id("com.android.application") apply false
     id("com.android.library") apply false
+    id("androidx-compose-material3-pullrefresh.root")
 }
 
-allprojects {
-    group = "me.omico.compose.material3"
-    version = projectVersion
-}
-
-val projectVersion: String
-    get() = run {
-        val version = properties["project.version"] as String
-        if (version != "snapshot") return@run version
-        val outputStream = ByteArrayOutputStream()
-        exec {
-            commandLine = listOf("git", "rev-parse", "--short", "HEAD")
-            standardOutput = outputStream
-        }
-        outputStream.toString().trim().let { commitId -> "$version.$commitId" }
-    }
-
-val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
-    if (!file.exists()) file.createNewFile()
-    load(file.inputStream())
-}
-
-listOf(
-    "project.compose.bom.version",
-    "project.compose.compiler.version",
-).forEach { ext[it] = localProperties[it] }
-
-val androidxDirectory = localProperties["androidx.directory"] as? String
-
-if (androidxDirectory != null && gradle.parent == null) {
-    val fetchAndroidx by tasks.registering {
-        group = "project"
-        exec {
-            workingDir = file(androidxDirectory)
-            commandLine = listOf("git", "fetch", "--all")
-        }
-    }
-    val checkoutAndroidx by tasks.registering {
-        group = "project"
-        dependsOn(fetchAndroidx)
-        mustRunAfter(fetchAndroidx)
-        exec {
-            workingDir = file(androidxDirectory)
-            commandLine = listOf("git", "checkout", localProperties["project.androidx.commitId"] as String)
-        }
-    }
-    tasks.register("syncUpstream") {
-        group = "project"
-        dependsOn(fetchAndroidx, checkoutAndroidx)
-        mustRunAfter(fetchAndroidx, checkoutAndroidx)
-        doLast {
-            val upstream = rootProject.file("$androidxDirectory/compose/material/material/src/commonMain/kotlin/androidx/compose/material/pullrefresh")
-            val local = rootProject.file("library/src/commonMain/kotlin/androidx/compose/material3/pullrefresh")
-            upstream.walk().forEach { upstreamFile ->
-                if (upstreamFile.isDirectory) return@forEach
-                val relativePath = upstreamFile.relativeTo(upstream)
-                val localFile = local.resolve(relativePath)
-                upstreamFile.copyTo(localFile, overwrite = true)
-                localFile.readText()
-                    .replace(
-                        oldValue = "package androidx.compose.material",
-                        newValue = "package androidx.compose.material3",
-                    )
-                    .replace(
-                        oldValue = "import androidx.compose.material.ExperimentalMaterialApi\n",
-                        newValue = "",
-                    )
-                    .replace(
-                        oldValue = "@ExperimentalMaterialApi\n",
-                        newValue = "",
-                    )
-                    .replace(
-                        oldValue = "import androidx.compose.material",
-                        newValue = "import androidx.compose.material3",
-                    )
-                    .replace(
-                        oldValue = "MaterialTheme.colors.surface",
-                        newValue = "MaterialTheme.colorScheme.surface",
-                    )
-                    .replace(
-                        // For Surface
-                        oldValue = "elevation = ",
-                        newValue = "shadowElevation = ",
-                    )
-                    .let(localFile::writeText)
-            }
-        }
-    }
+if (pluginManager.hasPlugin("androidx-compose-material3-pullrefresh.root")) {
+    apply(plugin = "androidx-compose-material3-pullrefresh.root")
 }
