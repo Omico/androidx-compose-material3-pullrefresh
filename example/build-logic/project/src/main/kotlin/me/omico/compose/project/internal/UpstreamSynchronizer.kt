@@ -33,7 +33,7 @@ abstract class UpstreamSynchronizer : DefaultTask() {
 
     @TaskAction
     fun sync() {
-        val commitId = "0872f930da585f7fbf6e17c74b1dc42045e8b2c6"
+        val commitId = "65e3f15108d25a7e1c5c841c0855b21eca194070"
         val androidxDirectory = androidxDirectoryProperty.asFile.get()
         val outputDirectory = outputSourceDirectoryProperty.asFile.get()
         val localPropertiesTemplateFile = localPropertiesTemplateFileProperty.asFile.get()
@@ -92,6 +92,27 @@ abstract class UpstreamSynchronizer : DefaultTask() {
                 newValue = "",
             )
             .replace(
+                oldValue = buildString {
+                    appendLine("    // Apply an elevation overlay if needed. Note that we aren't using Surface here, as we do not")
+                    appendLine("    // want its input-blocking behaviour, since the indicator is typically displayed above other")
+                    appendLine("    // (possibly) interactive content.")
+                    appendLine("    val elevationOverlay = LocalElevationOverlay.current")
+                },
+                newValue = "",
+            )
+            .replace(
+                oldValue = "    val color = elevationOverlay?.apply(color = backgroundColor, elevation = Elevation)\n",
+                newValue = "",
+            )
+            .replace(
+                oldValue = "        ?: backgroundColor\n\n",
+                newValue = "",
+            )
+            .replace(
+                oldValue = "            .background(color = color, shape = SpinnerShape)",
+                newValue = "            .background(color = surfaceColorAtElevation(color = backgroundColor, elevation = Elevation), shape = SpinnerShape)",
+            )
+            .replace(
                 oldValue = "package androidx.compose.material",
                 newValue = "package androidx.compose.material3",
             )
@@ -110,11 +131,6 @@ abstract class UpstreamSynchronizer : DefaultTask() {
             .replace(
                 oldValue = "MaterialTheme.colors.surface",
                 newValue = "MaterialTheme.colorScheme.surface",
-            )
-            .replace(
-                // For Surface
-                oldValue = "elevation = ",
-                newValue = "shadowElevation = ",
             )
             .let(localFile::writeText)
     }
