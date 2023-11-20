@@ -1,0 +1,39 @@
+@file:Suppress("UnstableApiUsage")
+
+plugins {
+    id("com.android.application")
+    kotlin("android")
+}
+
+kotlin {
+    jvmToolchain(11)
+}
+
+android {
+    namespace = "me.omico.compose.material3.pullrefresh.example.migrated"
+    compileSdk = 34
+    defaultConfig {
+        minSdk = 28
+    }
+    buildFeatures {
+        compose = true
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = versions.androidx.compose.compiler
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+dependencies {
+    implementation(androidx.activity.compose)
+    implementation(androidx.compose.foundation)
+    implementation(androidx.compose.material3("1.2.0-alpha11"))
+    implementation(androidx.compose.ui)
+    implementation(material)
+}

@@ -9,6 +9,7 @@ plugins {
 }
 
 include(":app")
+include(":migrated-app")
 
 includeBuild("../library") {
     dependencySubstitution {

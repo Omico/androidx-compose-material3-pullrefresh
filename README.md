@@ -7,6 +7,9 @@ see [here](<https://developer.android.com/reference/kotlin/androidx/compose/mate
 
 Note that you should change all package name from `androidx.compose.material.pullrefresh` into `androidx.compose.material3.pullrefresh`.
 
+> **Note**
+> Since Compose Material3 1.2.0-alpha11, the compose team has been officially supported an experimental implementation of this component. Please take a look at `example/migrated-app` for more information.
+
 ## Usage
 
 This library only supports using composite build to import to your project because it will be archived when the official library is released.
