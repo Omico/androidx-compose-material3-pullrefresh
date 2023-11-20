@@ -56,11 +56,11 @@ abstract class UpstreamSynchronizer : DefaultTask() {
                 outputDirectory = outputDirectory,
             )
         }
-        val androidxComposeBomVersion = versions.versionFor(Versions.COMPOSE_BOM)
-        val androidxComposeCompilerVersion = versions.versionFor(Versions.COMPOSE_COMPILER)
-        val androidxComposeMaterialVersion = versions.versionFor(Versions.COMPOSE_MATERIAL)
-        val androidGradlePluginVersion = versions.versionFor(Versions.ANDROID_GRADLE_PLUGIN)
-        val kotlinVersion = versions.versionFor(Versions.KOTLIN)
+        val androidxComposeBomVersion = versions.versionFor(ProjectVersions.COMPOSE_BOM)
+        val androidxComposeCompilerVersion = versions.versionFor(ProjectVersions.COMPOSE_COMPILER)
+        val androidxComposeMaterialVersion = versions.versionFor(ProjectVersions.COMPOSE_MATERIAL)
+        val androidGradlePluginVersion = versions.versionFor(ProjectVersions.ANDROID_GRADLE_PLUGIN)
+        val kotlinVersion = versions.versionFor(ProjectVersions.KOTLIN)
         localPropertiesTemplateFile.writeText(
             """
             |# Change these to fit your project's needs
