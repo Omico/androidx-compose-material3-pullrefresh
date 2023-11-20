@@ -14,6 +14,7 @@ import androidx.compose.material3.pullrefresh.PullRefreshIndicator
 import androidx.compose.material3.pullrefresh.pullRefresh
 import androidx.compose.material3.pullrefresh.rememberPullRefreshState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -33,7 +34,7 @@ class MainActivity : ComponentActivity() {
                 // From https://developer.android.com/reference/kotlin/androidx/compose/material/pullrefresh/package-summary#(androidx.compose.ui.Modifier).pullRefresh(androidx.compose.material.pullrefresh.PullRefreshState,kotlin.Boolean)
                 val refreshScope = rememberCoroutineScope()
                 var refreshing by remember { mutableStateOf(false) }
-                var itemCount by remember { mutableStateOf(15) }
+                var itemCount by remember { mutableIntStateOf(15) }
 
                 fun refresh() = refreshScope.launch {
                     refreshing = true
