@@ -33,7 +33,7 @@ abstract class UpstreamSynchronizer : DefaultTask() {
 
     @TaskAction
     fun sync() {
-        val commitId = "65e3f15108d25a7e1c5c841c0855b21eca194070"
+        val commitId = "b6d5e6e62e40f6938bdbcfef1d6c8a79e25006f8"
         val androidxDirectory = androidxDirectoryProperty.asFile.get()
         val outputDirectory = outputSourceDirectoryProperty.asFile.get()
         val localPropertiesTemplateFile = localPropertiesTemplateFileProperty.asFile.get()
