@@ -3,15 +3,15 @@ versions:
     activity: "1.8.1"
     compose:
       bom: "2023.10.01"
-      compiler: "1.5.4"
-  consensus: "0.5.0"
+      compiler: "1.5.5"
+  consensus: "0.6.0"
   gradle: "8.5"
   kotlin: "1.9.20"
   material: "1.10.0"
   plugins:
     android: "8.1.4"
     gradle.enterprise: "3.15.1"
-    spotless: "6.22.0"
+    spotless: "6.23.2"
 
 repositories:
   omico:
