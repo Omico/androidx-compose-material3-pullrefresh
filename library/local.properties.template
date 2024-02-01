@@ -2,9 +2,9 @@
 # Note 2023.10.01 contains androidx.compose.material:material:1.5.4
 # See https://developer.android.com/jetpack/androidx/releases/compose-material#1.5.4
 # See also, https://developer.android.com/jetpack/compose/bom/bom-mapping
-# Kotlin 1.9.20 require compose compiler 1.5.5
-# See https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.5
-project.android.gradle.plugin.version=8.1.4
+# Kotlin 1.9.22 require compose compiler 1.5.8
+# See https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.8
+project.android.gradle.plugin.version=8.2.2
 project.compose.bom.version=2023.10.01
-project.compose.compiler.version=1.5.5
-project.kotlin.version=1.9.20
+project.compose.compiler.version=1.5.8
+project.kotlin.version=1.9.22
