@@ -26,7 +26,7 @@ val syncUpstream by tasks.registering(UpstreamSynchronizer::class) {
     group = "project"
     enabled = androidxDirectory != null
     androidxDirectory?.run {
-        commitIdProperty.set("b6d5e6e62e40f6938bdbcfef1d6c8a79e25006f8")
+        commitIdProperty.set("4c61c4d68d2bf0ccc61e316bc2a03754bb6979cf")
         versionsProperty.set(projectVersions)
         androidxDirectoryProperty.set(androidxDirectory)
         outputSourceDirectoryProperty.set(file("library/src/main/kotlin/androidx/compose/material3/pullrefresh"))
