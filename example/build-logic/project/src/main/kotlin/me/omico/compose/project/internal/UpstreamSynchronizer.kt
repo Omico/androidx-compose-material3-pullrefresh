@@ -5,6 +5,7 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.internal.ProcessOperations
 import org.gradle.api.provider.MapProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
@@ -20,6 +21,9 @@ abstract class UpstreamSynchronizer : DefaultTask() {
     abstract val processOperations: ProcessOperations
 
     @get:Input
+    abstract val commitIdProperty: Property<String>
+
+    @get:Input
     abstract val versionsProperty: MapProperty<String, String>
 
     @get:InputDirectory
@@ -33,7 +37,7 @@ abstract class UpstreamSynchronizer : DefaultTask() {
 
     @TaskAction
     fun sync() {
-        val commitId = "b6d5e6e62e40f6938bdbcfef1d6c8a79e25006f8"
+        val commitId = commitIdProperty.get()
         val androidxDirectory = androidxDirectoryProperty.asFile.get()
         val outputDirectory = outputSourceDirectoryProperty.asFile.get()
         val localPropertiesTemplateFile = localPropertiesTemplateFileProperty.asFile.get()

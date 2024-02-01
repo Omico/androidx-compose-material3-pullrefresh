@@ -16,9 +16,8 @@ val wrapper: Wrapper by tasks.named<Wrapper>("wrapper") {
     distributionType = Wrapper.DistributionType.BIN
 }
 
-val androidxDirectory: String? = consensus.localProperties.getOrNull<String>("androidx.directory")
-    ?.replace("\\:", ":")
-    ?.replace("\\\\", "\\")
+val androidxDirectory = consensus.localProperties.getOrNull<File>("androidx.directory")
+    ?.takeIf(File::exists)
 
 val localPropertiesTemplateFile = file("library/local.properties.template")
 val projectVersions = buildVersions()
@@ -27,8 +26,9 @@ val syncUpstream by tasks.registering(UpstreamSynchronizer::class) {
     group = "project"
     enabled = androidxDirectory != null
     androidxDirectory?.run {
+        commitIdProperty.set("b6d5e6e62e40f6938bdbcfef1d6c8a79e25006f8")
         versionsProperty.set(projectVersions)
-        androidxDirectoryProperty.set(file(androidxDirectory))
+        androidxDirectoryProperty.set(androidxDirectory)
         outputSourceDirectoryProperty.set(file("library/src/main/kotlin/androidx/compose/material3/pullrefresh"))
         localPropertiesTemplateFileProperty.set(localPropertiesTemplateFile)
     }
