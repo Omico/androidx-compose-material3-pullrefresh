@@ -5,9 +5,9 @@
 # See also, https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.0
 #
 # Always use latest Compose Compiler to gain the latest features and bug fixes
-# See https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.8
+# See https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.9
 #
 project.android.gradle.plugin.version=8.2.2
 project.compose.bom.version=2024.01.00
-project.compose.compiler.version=1.5.8
+project.compose.compiler.version=1.5.9
 project.kotlin.version=1.9.22
