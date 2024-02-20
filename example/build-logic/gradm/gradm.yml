@@ -5,7 +5,7 @@ versions:
       bom: "2024.01.00"
       compiler: "1.5.8"
   consensus: "0.8.0"
-  gradle: "8.5"
+  gradle: "8.6"
   kotlin: "1.9.22"
   material: "1.11.0"
   plugins:
