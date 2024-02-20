@@ -2,7 +2,7 @@ versions:
   androidx:
     activity: "1.8.2"
     compose:
-      bom: "2024.01.00"
+      bom: "2024.02.00"
       compiler: "1.5.9"
   consensus: "0.9.0"
   gradle: "8.6"

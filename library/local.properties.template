@@ -1,13 +1,13 @@
 # Change these to fit your project's needs
 #
-# Compose BOM 2024.01.00 contains androidx.compose.material:material:1.6.0
+# Compose BOM 2024.02.00 contains androidx.compose.material:material:1.6.1
 # See https://developer.android.com/jetpack/compose/bom/bom-mapping
-# See also, https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.0
+# See also, https://developer.android.com/jetpack/androidx/releases/compose-material#1.6.1
 #
 # Always use latest Compose Compiler to gain the latest features and bug fixes
 # See https://developer.android.com/jetpack/androidx/releases/compose-compiler#1.5.9
 #
 project.android.gradle.plugin.version=8.2.2
-project.compose.bom.version=2024.01.00
+project.compose.bom.version=2024.02.00
 project.compose.compiler.version=1.5.9
 project.kotlin.version=1.9.22
