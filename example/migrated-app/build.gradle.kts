@@ -33,7 +33,7 @@ android {
 dependencies {
     implementation(androidx.activity.compose)
     implementation(androidx.compose.foundation)
-    implementation(androidx.compose.material3("1.2.0-alpha11"))
+    implementation(androidx.compose.material3)
     implementation(androidx.compose.ui)
     implementation(material)
 }
